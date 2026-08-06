@@ -15,77 +15,66 @@ A Google Workspace–powered automation platform that transforms manual warehous
 
 ---
 
-## 📌 المشكلة
+## 📌 The Problem
 
-قبل هذه المنصة، كانت عملية إصدار فواتير المستودعات تتم يدوياً بالكامل:
+Before this platform, warehouse invoicing was fully manual:
 
-- قام المشغلون بطباعة وتعبئة الفواتير يدويًا
-- تبادل السائقون صورًا غير واضحة عبر واتساب عندما كان الفرع يطلب نسخة من الفاتورة
-- تعرضت الفواتير المطبوعة للتلف أو الفقدان أو التلاعب
-- لم يكن هناك مصدر موثوق للتحقق من صحة الفاتورة
-- لم يكن هناك قاعدة بيانات يتم تسجيل الفواتير فيها
+- Operators printed and filled invoices by hand
+- Drivers shared blurry photos over WhatsApp when a branch needed a copy
+- Printed invoices got damaged, lost, or manipulated
+- No trusted source existed to verify invoice authenticity
+- No database existed to log and track invoices
 
 ---
 
-## ✅ الحل
+## ✅ The Solution
 
-### 1. نظرة عامة على المنصة
+### 1. Platform Overview
 ![Platform Overview](01-overview.png)
 
-تطبيق ويب واحد مدعوم بـ Google Workspace — يربط Apps Script كمحرك للأتمتة، وGoogle Sheets كقاعدة بيانات للمنتجات، وGoogle Drive كأرشيف سحابي، وPDF كمخرج نهائي. واجهة واحدة، متكاملة بالكامل.
+A single web app powered by Google Workspace — connecting Apps Script as the automation engine, Google Sheets as the product database, Google Drive as the cloud archive, and PDF as the final output. One interface, fully integrated.
 
 ---
 
-### 2. نموذج الفاتورة
+### 2. The Invoice Form
 ![Invoice Form](02-invoice-form.png)
 
-المشغل يُدخل فقط **رقم المنتج (SKU)** — وكل شيء آخر يتم تلقائيًا:
+The operator enters only the **SKU (Item Number)** — everything else is automatic:
 
-| الحقل | المصدر |
+| Field | Source |
 |---|---|
-| POD ID | يتولد تلقائيًا |
-| Submitted By | يُكتشف تلقائيًا (البريد الإلكتروني للمستخدم) |
-| QR Code | يتولد تلقائيًا |
-| Ship Date & Time | يُملأ تلقائيًا (الوقت الحالي) |
-| Description | يُسترجع تلقائيًا من Google Sheets |
-| Barcode | يُسترجع تلقائيًا من Google Sheets |
-| Remaining Qty | القيمة الوحيدة التي تُدخل يدويًا |
+| POD ID | Auto-generated |
+| Submitted By | Auto-detected (user email) |
+| QR Code | Auto-generated |
+| Ship Date & Time | Auto-filled (current timestamp) |
+| Description | Auto-retrieved from Google Sheets DB |
+| Barcode | Auto-retrieved from Google Sheets DB |
+| Remaining Qty | The only manual input |
 
 ---
 
-### 3. نقرة واحدة ← سبع إجراءات تلقائية
+### 3. One Click → Seven Automated Actions
 ![One Click Automation](03-one-click-automation.png)
 
-الضغط على **Submit & Print** يُشغّل 7 خطوات تلقائية في آنٍ واحد:
+Clicking **Submit & Print** triggers 7 automated steps simultaneously:
 
-| # | الإجراء | الحالة |
+| # | Action | Status |
 |---|---|---|
-| 1 | توليد معرّف فاتورة فريد | ✅ تلقائي |
-| 2 | التقاط بريد المستخدم المُرسِل | ✅ تلقائي |
-| 3 | توليد QR Code قابل للمسح | ✅ تلقائي |
-| 4 | توليد فاتورة PDF جاهزة للطباعة | ✅ تلقائي |
-| 5 | تسجيل البيانات في Google Sheets | ✅ تلقائي |
-| 6 | رفع الـ PDF إلى Google Drive | ✅ تلقائي |
-| 7 | إرسال الفاتورة إلى الطابعة | ✅ تلقائي |
+| 1 | Generate unique Invoice ID | ✅ Auto |
+| 2 | Capture submitting user's email | ✅ Auto |
+| 3 | Generate scannable QR Code | ✅ Auto |
+| 4 | Generate print-ready PDF invoice | ✅ Auto |
+| 5 | Record data in Google Sheets | ✅ Auto |
+| 6 | Upload PDF to Google Drive | ✅ Auto |
+| 7 | Send invoice to printer | ✅ Auto |
 
 ---
 
-### 4. بوابة البحث عن الفواتير
+### 4. Invoice Lookup Portal
 ![Invoice Lookup Portal](04-invoice-lookup-portal.png)
 
-يستطيع أي موظف في الفرع استرداد الفاتورة الأصلية فورًا عن طريق إدخال رقم الشحنة (ST Number) — دون واتساب، دون بحث يدوي، ودون خطر تقديم نسخة مزوّرة. كل فرع يسحب من نفس المصدر الموثوق.
+Any branch employee can retrieve the original invoice instantly by entering the ST Number — no WhatsApp, no manual searching, no risk of a tampered copy. Every branch pulls from the same single verified source.
 
 ---
 
-## 📁 هيكل المستودع
-
-```
-smart-invoice-platform/
-├── index.html      → واجهة نموذج الفاتورة (Frontend)
-├── Code.gs         → الكود الخلفي (Google Apps Script)
-└── screenshots/    → صور عرض المشروع
-```
-
----
-
-> تم بناؤه كجزء من محفظة أتمتة — لتحويل سير العمل اليدوي إلى أنظمة رقمية موثوقة وقابلة للتتبع.
+> Built as part of an automation portfolio — turning manual operational workflows into reliable, traceable digital systems.
